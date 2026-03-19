@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Idul Fitri 1447 H</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Playfair+Display:wght@700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+        :root {
+            --hijau-tua: #0a3b2a;
+            --hijau: #1d5a3e;
+            --emas: #ffd700;
+            --emas-gelap: #c9a800;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(160deg, var(--hijau-tua) 0%, var(--hijau) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* === CURTAIN ANIMATION === */
+        .curtain-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            z-index: 2000;
+            pointer-events: none;
+        }
+
+        .curtain {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, #1d5a3e, #0a3b2a);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .curtain-left {
+            left: 0;
+            border-right: 3px solid #ffd700;
+        }
+
+        .curtain-right {
+            right: 0;
+            border-left: 3px solid #ffd700;
+        }
+
+        .curtain-content {
+            color: #ffd700;
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 0 #0a3b2a;
+            animation: curtainPulse 2s ease-in-out infinite;
+            font-family: 'Playfair Display', serif;
+        }
+
+        @keyframes curtainPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        /* === DEKORASI LATAR === */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 40% 40% at 15% 25%, rgba(255,215,0,0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 85% 75%, rgba(255,215,0,0.08) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Bulan sabit */
+        .moon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--emas);
+            box-shadow: 0 0 30px rgba(255,215,0,0.5);
+            z-index: 100;
+            opacity: 0;
+            transform: scale(0);
+        }
+        .moon::after {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 12px;
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            background: var(--hijau-tua);
+        }
+
+        /* Bintang */
+        .stars {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .star {
+            position: absolute;
+            color: var(--emas);
+            font-size: 1.2rem;
+            opacity: 0.7;
+            animation: kedip 3s ease-in-out infinite;
+            will-change: opacity;
+        }
+        .star:nth-child(1)  { top:  8%; left:  6%; font-size: 1.5rem; animation-delay: 0s; }
+        .star:nth-child(2)  { top: 22%; right: 12%; font-size: 1.8rem; animation-delay: 0.6s; }
+        .star:nth-child(3)  { top: 65%; left:  7%; animation-delay: 1.1s; }
+        .star:nth-child(4)  { bottom: 18%; right: 14%; font-size: 1.4rem; animation-delay: 1.7s; }
+        .star:nth-child(5)  { top: 42%; left: 13%; animation-delay: 2.2s; }
+
+        @keyframes kedip {
+            0%, 100% { opacity: 0.7; }
+            50%       { opacity: 0.2; }
+        }
+
+        /* === KARTU === */
+        .container { 
+            width: 100%; 
+            max-width: 520px; 
+            position: relative; 
+            z-index: 100; 
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .card {
+            background: rgba(255,255,255,0.96);
+            border-radius: 32px;
+            padding: 44px 36px 36px;
+            border: 3px solid var(--emas);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,215,0,0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+            animation: rotateGlow 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotateGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Ornamen garis-bintang */
+        .ornamen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+        .ornamen .garis {
+            flex: 1;
+            max-width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--emas), transparent);
+        }
+        .ornamen .ikon {
+            color: var(--emas);
+            font-size: 1.1rem;
+            animation: putar 6s linear infinite;
+            will-change: transform;
+        }
+        @keyframes putar {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Judul */
+        .judul {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 8vw, 3rem);
+            font-weight: 900;
+            color: var(--hijau);
+            text-shadow: 2px 2px 0 var(--emas);
+            line-height: 1.1;
+            margin-bottom: 4px;
+            transform: translateY(-100px);
+            opacity: 0;
+        }
+        .tahun {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 6vw, 2.4rem);
+            font-weight: 700;
+            color: var(--emas);
+            text-shadow: 1px 1px 0 var(--hijau);
+            margin-bottom: 26px;
+            transform: translateY(-100px);
+            opacity: 0;
+        }
+
+        /* Kotak ucapan tengah */
+        .ucapan-box {
+            background: rgba(255,215,0,0.08);
+            border: 2px dashed rgba(255,215,0,0.6);
+            border-radius: 20px;
+            padding: 22px 20px;
+            margin: 0 0 22px;
+            transform: translateY(-100px);
+            opacity: 0;
+        }
+        .arab {
+            font-family: 'Amiri', serif;
+            font-size: clamp(1.4rem, 5vw, 2rem);
+            color: var(--hijau-tua);
+            direction: rtl;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+        .arti {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: Italic;
+        }
+
+        /* Pesan */
+        .pesan {
+            font-size: clamp(0.9rem, 3.5vw, 1.05rem);
+            line-height: 1.8;
+            color: #444;
+            font-style: italic;
+            margin-bottom: 22px;
+            padding: 0 8px;
+            min-height: 80px;
+        }
+        
+        .pesan span {
+            opacity: 0;
+            display: inline-block;
+        }
+
+        /* Pengirim */
+        .pengirim {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            font-size: 1rem;
+            color: var(--hijau);
+            font-weight: 600;
+            padding-top: 18px;
+            border-top: 2px solid rgba(255,215,0,0.5);
+            margin-bottom: 14px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .pengirim strong {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: #66BB6A;
+        }
+
+        /* Ornamen bawah */
+        .ornamen-bawah {
+            margin: 0 0 22px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        /* Tombol */
+        .btn-model {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--emas), #ffb700);
+            color: var(--hijau);
+            border: 2px solid var(--hijau);
+            border-radius: 50px;
+            padding: 13px 28px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.25s, color 0.25s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .btn-model:hover,
+        .btn-model:focus-visible {
+            background: var(--hijau);
+            color: var(--emas);
+            border-color: var(--emas);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(255,215,0,0.3);
+        }
+        .btn-model svg { transition: transform 0.2s; }
+        .btn-model:hover svg { transform: translateX(4px); }
+
+        /* Footer */
+        .footer {
+            font-size: 0.78rem;
+            color: #999;
+            line-height: 1.7;
+            margin-top: 10px;
+            padding-top: 0;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .hati {
+            display: inline-block;
+            color: #e74c3c;
+            animation: detak 1.4s ease infinite;
+            will-change: transform;
+        }
+        @keyframes detak {
+            0%, 100% { transform: scale(1); }
+            30%       { transform: scale(1.3); }
+            60%       { transform: scale(1); }
+        }
+
+        /* ===== TOMBOL MUSIK ===== */
+        .music-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #1d5a3e, #0a3b2a);
+            border: 2px solid #ffd700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2100;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease, border-color 0.3s ease;
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        .music-btn:hover {
+            background: #ffd700;
+            border-color: #1d5a3e;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .music-btn i {
+            color: #ffd700;
+            font-size: 1.6rem;
+            transition: color 0.3s ease;
+        }
+
+        .music-btn:hover i {
+            color: #1d5a3e;
+        }
+
+        .music-btn.playing-song1 i,
+        .music-btn.playing-song2 i {
+            animation: spin 3s linear infinite;
+        }
+
+        .music-btn.playing-song1 i {
+            color: #44aaff;
+        }
+
+        .music-btn.playing-song2 i {
+            color: #44ff88;
+        }
+
+        .music-btn.playing-song1:hover i,
+        .music-btn.playing-song2:hover i {
+            color: #1d5a3e;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .music-btn {
+                bottom: 25px;
+                right: 25px;
+                width: 50px;
+                height: 50px;
+            }
+            .music-btn i { font-size: 1.4rem; }
+            
+            .btn-model {
+                margin-bottom: 15px;
+            }
+            
+            .curtain-content {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card { padding: 32px 18px 26px; border-radius: 24px; }
+            .moon { width: 52px; height: 52px; }
+            .moon::after { width: 46px; height: 46px; left: 9px; top: -5px; }
+            
+            .music-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+            .music-btn i { font-size: 1.3rem; }
+            
+            .btn-model {
+                margin-bottom: 12px;
+            }
+            
+            .curtain-content {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- CURTAIN ANIMATION -->
+    <div class="curtain-container" id="curtainContainer">
+        <div class="curtain curtain-left" id="curtainLeft">
+            <div class="curtain-content">✦ IDUL FITRI ✦</div>
+        </div>
+        <div class="curtain curtain-right" id="curtainRight">
+            <div class="curtain-content">1447 H ✦</div>
+        </div>
+    </div>
+
+    <!-- Bulan -->
+    <div class="moon" id="moon" aria-hidden="true"></div>
+
+    <!-- Bintang -->
+    <div class="stars" aria-hidden="true">
+        <span class="star">★</span>
+        <span class="star">✧</span>
+        <span class="star">✦</span>
+        <span class="star">☆</span>
+        <span class="star">✩</span>
+    </div>
+
+    <!-- TOMBOL MUSIK -->
+    <div class="music-btn" id="musicButton">
+        <i class="fas fa-music" id="musicIcon"></i>
+    </div>
+
+    <!-- AUDIO PLAYER -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="audio/takbiran.mp3" type="audio/mpeg">
+        <source src="audio/idul-fitri.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+
+    <!-- KARTU UTAMA -->
+    <div class="container" id="mainContainer">
+        <div class="card">
+            <!-- Ornamen atas -->
+            <div class="ornamen" aria-hidden="true">
+                <span class="garis"></span>
+                <span class="ikon">✦</span>
+                <span class="garis"></span>
+            </div>
+
+            <!-- Judul -->
+            <h1 class="judul" id="judul">Selamat Idul Fitri</h1>
+            <p class="tahun" id="tahun">1447 H</p>
+
+            <!-- Ucapan -->
+            <div class="ucapan-box" id="ucapanBox">
+                <p class="arab">مِنَ الْعَائِدِيْنَ وَالْفَائِزِيْنَ</p>
+                <p class="arti">"Semoga kita termasuk orang orang yang kembali ke fitrah dan meraih kemenangan"</p>
+            </div>
+
+            <!-- Pesan (Typewriter) -->
+            <p class="pesan" id="pesan"></p>
+
+            <!-- Pengirim -->
+            <div class="pengirim" id="pengirim">
+                From : <strong>Rikz</strong>
+            </div>
+
+            <!-- TOMBOL 3D MODELS -->
+            <a href="model.html" class="btn-model" id="modelLink">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                </svg>
+                Lihat 3D Models
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+            
+                       <!-- Ornamen bawah -->
+            <div class="ornamen ornamen-bawah" id="ornamenBawah" aria-hidden="true">
+                <span class="garis"></span>
+                <span class="ikon" style="animation-direction:reverse">☽</span>
+                <span class="garis"></span>
+            </div>
+
+            <!-- FOOTER <--></-->
+            <div class="footer" id="footer">
+                <p>© 2026 · Selamat Idul Fitri 1447 H</p>
+                <p>Created by Rikz | Stack : HTML5 • CSS3 • JS</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT MUSIK -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          // ===== UNLOCK AUDIO (WAJIB UNTUK HP) =====
+let audioUnlocked = false;
+
+document.body.addEventListener('click', function () {
+    if (!audioUnlocked) {
+        const typingSound = document.getElementById('typingSound');
+        if (typingSound) {
+            typingSound.play().then(() => {
+                typingSound.pause();
+                typingSound.currentTime = 0;
+            }).catch(() => {});
+        }
+        audioUnlocked = true;
+    }
+}, { once: true });
+            const bgMusic = document.getElementById('bgMusic');
+            const musicButton = document.getElementById('musicButton');
+            const musicIcon = document.getElementById('musicIcon');
+            const modelLink = document.getElementById('modelLink');
+            
+            if (!bgMusic || !musicButton || !musicIcon) {
+                console.error('Elemen audio tidak ditemukan!');
+                return;
+            }
+            
+            // Daftar lagu
+            const songs = ['audio/takbiran.mp3', 'audio/idul-fitri.mp3'];
+            let currentMode = 'stop';
+            let isPlaying = false;
+            
+            function nextMode() {
+                if (currentMode === 'stop') { playSong(0); currentMode = 'song1'; }
+                else if (currentMode === 'song1') { playSong(1); currentMode = 'song2'; }
+                else if (currentMode === 'song2') { stopMusic(); currentMode = 'stop'; }
+            }
+            
+            function playSong(songIndex) {
+                bgMusic.src = songs[songIndex];
+                bgMusic.load();
+                bgMusic.play().then(() => {
+                    isPlaying = true;
+                    musicIcon.className = 'fas fa-pause';
+                    musicButton.classList.remove('playing-song1', 'playing-song2');
+                    musicButton.classList.add(songIndex === 0 ? 'playing-song1' : 'playing-song2');
+                    localStorage.setItem('currentMode', currentMode);
+                    localStorage.setItem('currentSong', songIndex);
+                    localStorage.setItem('musicPlaying', 'true');
+                    localStorage.setItem('musicTime', bgMusic.currentTime);
+                }).catch(() => {});
+            }
+            
+            function stopMusic() {
+                bgMusic.pause();
+                isPlaying = false;
+                musicIcon.className = 'fas fa-music';
+                musicButton.classList.remove('playing-song1', 'playing-song2');
+                localStorage.setItem('musicPlaying', 'false');
+                localStorage.setItem('musicTime', bgMusic.currentTime);
+                localStorage.setItem('currentMode', currentMode);
+            }
+            
+            musicButton.addEventListener('click', (e) => { e.preventDefault(); nextMode(); });
+            
+            // Load musik dari localStorage
+            const savedPlaying = localStorage.getItem('musicPlaying');
+            const savedSong = localStorage.getItem('currentSong');
+            const savedTime = localStorage.getItem('musicTime');
+            
+            if (savedPlaying === 'true' && savedSong !== null) {
+                const songIndex = parseInt(savedSong);
+                bgMusic.src = songs[songIndex];
+                if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
+                bgMusic.play().then(() => {
+                    isPlaying = true;
+                    musicIcon.className = 'fas fa-pause';
+                    musicButton.classList.add(songIndex === 0 ? 'playing-song1' : 'playing-song2');
+                }).catch(() => {});
+            }
+            
+            setInterval(() => {
+                if (isPlaying && !bgMusic.paused) localStorage.setItem('musicTime', bgMusic.currentTime);
+            }, 1000);
+            
+            bgMusic.addEventListener('pause', () => {
+                isPlaying = false;
+                musicIcon.className = 'fas fa-music';
+                musicButton.classList.remove('playing-song1', 'playing-song2');
+                localStorage.setItem('musicPlaying', 'false');
+            });
+            
+            // Saat pindah halaman, simpan status
+            if (modelLink) {
+                modelLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    localStorage.setItem('musicPlaying', isPlaying ? 'true' : 'false');
+                    localStorage.setItem('currentMode', currentMode);
+                    localStorage.setItem('musicTime', bgMusic.currentTime);
+                    
+                    if (currentMode === 'song1') localStorage.setItem('currentSong', 0);
+                    else if (currentMode === 'song2') localStorage.setItem('currentSong', 1);
+                    
+                    window.location.href = 'model.html';
+                });
+            }
+        });
+    </script>
+  
+    <!-- ===== SOUND EFFECT TOMBOL ===== -->
+    <audio id="clickSound" preload="auto">
+        <source src="https://g.top4top.io/m_37280idj10.mp3" type="audio/mpeg">
+        <source src="sounds/button.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="typingSound" preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8a4a6c0f4.mp3" type="audio/mpeg">
+</audio>
+  
+    <!-- GSAP ANIMATION -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ===== SOUND EFFECT =====
+            const clickSound = document.getElementById('clickSound');
+            if (clickSound) {
+                clickSound.volume = 0.3;
+                
+                function playClickSound() {
+                    const sound = clickSound.cloneNode();
+                    sound.volume = 0.3;
+                    sound.play().catch(e => console.log('Error memutar suara:', e));
+                }
+                
+                // Tambahkan sound ke tombol
+                const musicBtn = document.getElementById('musicButton');
+                const modelLink = document.getElementById('modelLink');
+                
+                if (musicBtn) musicBtn.addEventListener('click', playClickSound);
+                if (modelLink) modelLink.addEventListener('click', playClickSound);
+            }
+            
+            // ===== GSAP ANIMATION TIMELINE =====
+            const tl = gsap.timeline({
+                defaults: { ease: "power2.out" }
+            });
+            
+            // Ambil elemen
+            const curtainLeft = document.getElementById('curtainLeft');
+            const curtainRight = document.getElementById('curtainRight');
+            const moon = document.getElementById('moon');
+            const musicBtn = document.getElementById('musicButton');
+            const mainContainer = document.getElementById('mainContainer');
+            const judul = document.getElementById('judul');
+            const tahun = document.getElementById('tahun');
+            const ucapanBox = document.getElementById('ucapanBox');
+            const pesanElement = document.getElementById('pesan');
+            const pengirim = document.getElementById('pengirim');
+            const ornamenBawah = document.getElementById('ornamenBawah');
+            const modelLinkEl = document.getElementById('modelLink');
+            const footer = document.getElementById('footer');
+            
+            // Teks untuk typewriter
+            const teksPesan = "Mata bisa salah memandang, mulut bisa salah berucap, hati bisa salah menduga. Di hari yang suci ini, mari saling memaafkan dan menyucikan hati. Selamat Idul Fitri, Minal Aidin Wal Faizin. Mohon maaf lahir dan batin ✨🙏";
+            
+            // ===== 1. OPENING CURTAIN =====
+            tl.to([curtainLeft, curtainRight], {
+                duration: 1.5,
+                x: (i) => i === 0 ? '-100%' : '100%',
+                ease: "power3.inOut"
+            })
+            // ===== 2. MUNCULKAN BULAN DAN TOMBOL MUSIK =====
+            .to([moon, musicBtn], {
+                duration: 0.8,
+                scale: 1,
+                opacity: 1,
+                stagger: 0.2,
+                ease: "back.out(1.2)"
+            }, "-=0.5")
+            // ===== 3. MUNCULKAN KARTU UTAMA =====
+            .to(mainContainer, {
+                duration: 0.8,
+                opacity: 1,
+                y: 0,
+                ease: "power2.out"
+            }, "-=0.3")
+            // ===== 4. FALL FROM TOP UNTUK JUDUL & UCAPAN =====
+            .to([judul, tahun, ucapanBox], {
+                duration: 1.2,
+                y: 0,
+                opacity: 1,
+                stagger: 0.15,
+                ease: "back.out(1.7)"
+            }, "-=0.2")
+            // ===== 5. TYPEWRITER EFFECT + SOUND =====
+.call(() => {
+    pesanElement.innerHTML = '';
+
+    let i = 0;
+    const speed = 30;
+
+    const typingSound = document.getElementById('typingSound');
+
+    function playTypingSound() {
+        if (!typingSound) return;
+
+        typingSound.currentTime = 0;
+        typingSound.volume = 0.2;
+        typingSound.play().catch(() => {});
+    }
+
+    function typeWriter() {
+        if (i < teksPesan.length) {
+            pesanElement.innerHTML += teksPesan.charAt(i);
+
+            // bunyi tiap huruf (kecuali spasi)
+            if (teksPesan.charAt(i) !== " ") {
+                playTypingSound();
+            }
+
+            i++;
+            setTimeout(typeWriter, speed);
+        } else {
+            tl.play();
+        }
+    }
+
+    tl.pause();
+    typeWriter();
+})
+            // ===== 6. STAGGERED FADE-IN UNTUK ELEMEN BAWAH =====
+            .to([pengirim, ornamenBawah, modelLinkEl, footer], {
+                duration: 0.8,
+                opacity: 1,
+                y: 0,
+                stagger: 0.15,
+                ease: "power2.out"
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Model Idul Fitri - 10 Model</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            background: #0a1f2a;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a3b2a, #1d5a3e, #0f4a35);
+            background-size: 400% 400%;
+            animation: gradientBG 8s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9000;
+            transition: opacity 0.8s ease;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .loading-content {
+            text-align: center;
+            color: white;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 60px;
+            border: 2px solid #ffd700;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
+            animation: float 3s ease infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .moon-loader {
+            width: 80px;
+            height: 80px;
+            background: #ffd700;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            box-shadow: 0 0 50px #ffd700;
+            position: relative;
+            animation: pulse 2s ease infinite;
+        }
+
+        .moon-loader::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 15px;
+            width: 70px;
+            height: 70px;
+            background: #0f4a35;
+            border-radius: 50%;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 50px #ffd700; }
+            50% { transform: scale(1.1); box-shadow: 0 0 80px #ffd700; }
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 215, 0, 0.3);
+            border-top: 4px solid #ffd700;
+            border-radius: 50%;
+            margin: 20px auto;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-progress {
+            width: 300px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #ffaa00);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .loading-sub {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 10px;
+            color: #ffd700;
+        }
+
+        /* ===== UI OVERLAY ===== */
+        .ui-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+            padding: 20px;
+        }
+
+        /* Header Info - 1 BARIS DI TENGAH ATAS */
+        .header-info {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(10px);
+            color: #ffd700;
+            padding: 12px 24px;
+            border-radius: 40px;
+            border: 2px solid #ffd700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            pointer-events: none;
+            z-index: 150;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            opacity: 1;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .header-info i {
+            color: #ffd700;
+            font-size: 1.3rem;
+        }
+
+        .header-info span {
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Style khusus untuk THR */
+        .header-info.thr-mode {
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: #1d5a3e;
+            border-color: #1d5a3e;
+            animation: pulseGold 1.5s ease infinite;
+        }
+
+        .header-info.thr-mode i {
+            color: #1d5a3e;
+        }
+
+        .header-info.thr-mode span {
+            color: #1d5a3e;
+            font-weight: 700;
+        }
+
+        @keyframes pulseGold {
+            0%, 100% { transform: translateX(-50%) scale(1); box-shadow: 0 0 20px #ffd700; }
+            50% { transform: translateX(-50%) scale(1.05); box-shadow: 0 0 40px #ffd700; }
+        }
+
+        /* Tombol Kembali */
+        .back-btn {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            background: linear-gradient(135deg, #1d5a3e, #0a3b2a);
+            backdrop-filter: blur(10px);
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            width: 60px;
+            height: 60px;
+            color: #ffd700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
+            z-index: 200;
+            pointer-events: all;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            opacity: 1;
+        }
+
+        .back-btn:hover {
+            background: #ffd700;
+            border-color: #1d5a3e;
+        }
+
+        .back-btn i {
+            font-size: 1.8rem;
+            transition: color 0.3s ease;
+            color: #ffd700;
+        }
+
+        .back-btn:hover i {
+            color: #1d5a3e;
+        }
+        
+        .back-btn:active {
+            transform: scale(0.98);
+            background: linear-gradient(135deg, #1d5a3e, #0a3b2a);
+            border-color: #ffd700;
+        }
+
+        .back-btn:active i {
+            color: #ffd700;
+        }
+
+        /* ===== TOMBOL MUSIK ===== */
+        .music-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #1d5a3e, #0a3b2a);
+            border: 2px solid #ffd700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 300;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
+            opacity: 1;
+        }
+
+        .music-btn:hover {
+            background: #ffd700;
+            border-color: #1d5a3e;
+        }
+
+        .music-btn i {
+            color: #ffd700;
+            font-size: 1.6rem;
+            transition: color 0.3s ease;
+        }
+
+        .music-btn:hover i {
+            color: #1d5a3e;
+        }
+
+        .music-btn:active {
+            transform: scale(0.98);
+            background: linear-gradient(135deg, #1d5a3e, #0a3b2a);
+            border-color: #ffd700;
+        }
+
+        .music-btn:active i {
+            color: #ffd700;
+        }
+
+        .music-btn.playing-song1 i,
+        .music-btn.playing-song2 i {
+            animation: spin 3s linear infinite;
+        }
+
+        .music-btn.playing-song1 i {
+            color: #44aaff;
+        }
+
+        .music-btn.playing-song2 i {
+            color: #44ff88;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* ===== PANEL NAVIGASI ===== */
+        .nav-panel {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            z-index: 250;
+            pointer-events: all;
+            transition: opacity 0.3s ease;
+            opacity: 1;
+        }
+
+        .nav-panel.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .nav-arrow.disabled,
+        .nav-center.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-arrow {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #1d5a3e, #0a3b2a);
+            border: 2px solid #ffd700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-arrow:hover {
+            background: #ffd700;
+            border-color: #1d5a3e;
+        }
+
+        .nav-arrow i {
+            color: #ffd700;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-arrow:hover i {
+            color: #1d5a3e;
+        }
+
+        .nav-arrow:active {
+            transform: scale(0.98);
+            background: linear-gradient(135deg, #1d5a3e, #0a3b2a);
+            border-color: #ffd700;
+        }
+
+        .nav-arrow:active i {
+            color: #ffd700;
+        }
+
+        .nav-center {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1d5a3e, #0a3b2a);
+            border: 2px solid #ffd700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+            font-size: 1.8rem;
+        }
+
+        .nav-center:hover {
+            background: #ffd700;
+            border-color: #1d5a3e;
+        }
+
+        .nav-center span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-center:hover span {
+            transform: scale(1.1);
+        }
+
+        .nav-center .model-icon {
+            color: #ffd700;
+        }
+
+        .nav-center .close-icon {
+            color: #ff4444;
+            font-weight: bold;
+            font-size: 2rem;
+        }
+
+        .nav-center:hover .model-icon {
+            color: #1d5a3e;
+        }
+
+        .nav-center:hover .close-icon {
+            color: #1d5a3e;
+        }
+
+        .nav-center:active {
+            transform: scale(0.98);
+            background: linear-gradient(135deg, #1d5a3e, #0a3b2a);
+            border-color: #ffd700;
+        }
+
+        .nav-center:active .model-icon {
+            color: #ffd700;
+        }
+
+        .nav-center:active .close-icon {
+            color: #ff4444;
+        }
+
+        .nav-center .model-icon {
+            display: flex;
+        }
+
+        .nav-center .close-icon {
+            display: none;
+        }
+
+        .nav-center.showing-info .model-icon {
+            display: none;
+        }
+
+        .nav-center.showing-info .close-icon {
+            display: flex;
+        }
+
+        /* Teks INFO */
+        .info-text {
+            color: #ffd700;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            padding: 6px 16px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 215, 0, 0.5);
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            opacity: 1;
+        }
+
+        .info-text i {
+            font-size: 0.8rem;
+            animation: bounce 1.5s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(3px); }
+        }
+
+        .nav-center.showing-info + .info-text {
+            opacity: 0.5;
+        }
+        
+        /* ===== INFO MODEL ===== */
+        .model-info {
+            position: fixed;
+            bottom: 140px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(145deg, #1a4f3a, #0f3a2a);
+            border: 2px solid #ffd700;
+            border-radius: 30px;
+            padding: 20px 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 215, 0, 0.2) inset;
+            z-index: 180;
+            opacity: 0;
+            transform: translateX(-50%) translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+            min-width: 300px;
+            max-width: 500px;
+            text-align: left;
+        }
+
+        .model-info.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .model-info.hide {
+            opacity: 0;
+            transform: translateX(-50%) translateY(20px);
+        }
+
+        .model-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 12px;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.3;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+            padding-bottom: 10px;
+            text-shadow: 0 2px 5px rgba(255, 215, 0, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .model-desc {
+            font-size: 1rem;
+            color: #f0f0f0;
+            opacity: 0.95;
+            font-weight: 400;
+            line-height: 1.7;
+            text-align: justify;
+            text-justify: inter-word;
+            margin-bottom: 5px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            hyphens: auto;
+            padding: 0 5px;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: auto;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .ui-overlay { padding: 15px; }
+            .header-info {
+                top: 15px;
+                padding: 10px 20px;
+                gap: 10px;
+                z-index: 150;
+            }
+            .header-info i { font-size: 1.1rem; }
+            .header-info span { font-size: 0.9rem; }
+            
+            .back-btn {
+                bottom: 20px;
+                left: 20px;
+                width: 50px;
+                height: 50px;
+                z-index: 200;
+            }
+            .back-btn i { font-size: 1.5rem; }
+            
+            .music-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                z-index: 300;
+            }
+            .music-btn i { font-size: 1.4rem; }
+            
+            .model-info {
+                bottom: 120px;
+                padding: 15px 25px;
+                min-width: 250px;
+                z-index: 180;
+            }
+            
+            .model-name {
+                font-size: 1.4rem;
+            }
+            
+            .model-desc {
+                font-size: 0.9rem;
+            }
+            
+            .nav-panel { 
+                bottom: 20px; 
+                z-index: 250;
+            }
+            .nav-buttons { gap: 15px; }
+            .nav-arrow { width: 45px; height: 45px; }
+            .nav-arrow i { font-size: 1.3rem; }
+            .nav-center { width: 55px; height: 55px; font-size: 1.5rem; }
+            .info-text { 
+                font-size: 0.8rem; 
+                padding: 5px 14px; 
+            }
+            .info-text i { font-size: 0.7rem; }
+        }
+
+        @media (max-width: 480px) {
+            .header-info {
+                top: 12px;
+                padding: 8px 16px;
+                gap: 8px;
+                border-width: 1.5px;
+                z-index: 150;
+            }
+            .header-info i { font-size: 1rem; }
+            .header-info span { font-size: 0.85rem; }
+            
+            .back-btn {
+                bottom: 15px;
+                left: 15px;
+                width: 45px;
+                height: 45px;
+                border-width: 1.5px;
+                z-index: 200;
+            }
+            .back-btn i { font-size: 1.3rem; }
+            
+            .music-btn {
+                bottom: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+                z-index: 300;
+            }
+            .music-btn i { font-size: 1.3rem; }
+            
+            .model-info {
+                bottom: 105px;
+                padding: 12px 20px;
+                min-width: 220px;
+                z-index: 180;
+            }
+            
+            .model-name {
+                font-size: 1.2rem;
+            }
+            
+            .model-desc {
+                font-size: 0.8rem;
+            }
+            
+            .nav-panel { 
+                bottom: 15px; 
+                z-index: 250;
+            }
+            .nav-buttons { gap: 12px; }
+            .nav-arrow { width: 40px; height: 40px; }
+            .nav-arrow i { font-size: 1.2rem; }
+            .nav-center { width: 50px; height: 50px; font-size: 1.3rem; }
+            .nav-center .close-icon { font-size: 1.8rem; }
+            .info-text { 
+                font-size: 0.7rem; 
+                padding: 4px 12px; 
+            }
+            .info-text i { font-size: 0.6rem; }
+        }
+ #thrButton {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    width: 150px;
+    height: 150px;
+
+    opacity: 0; /* 🔥 bikin ga keliatan */
+    cursor: pointer;
+
+    z-index: 9999;
+    display: none;
+}
+
+#thrButton:hover {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+}
+    </style>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- GSAP Animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <!-- Three.js Import Map -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.128.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.128.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="moon-loader"></div>
+            <div class="loading-spinner"></div>
+            <h2>Memuat 3D Model</h2>
+            <p>Mohon tunggu sebentar...</p>
+            <div class="loading-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <p class="loading-sub" id="loadingStatus">Menyiapkan dekorasi...</p>
+        </div>
+    </div>
+
+    <!-- TOMBOL MUSIK -->
+    <div class="music-btn" id="musicButton">
+        <i class="fas fa-music" id="musicIcon"></i>
+    </div>
+
+    <!-- AUDIO PLAYER -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="audio/takbiran.mp3" type="audio/mpeg">
+        <source src="audio/idul-fitri.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+
+    <!-- INFO MODEL -->
+    <div class="model-info hide" id="modelInfo">
+        <div class="model-name" id="modelName">Masjid</div>
+        <div class="model-desc" id="modelDesc">Tempat Ibadah Umat Islam</div>
+    </div>
+
+    <!-- PANEL NAVIGASI -->
+    <div class="nav-panel" id="navPanel">
+        <div class="info-text" id="infoText">
+            <span>INFO</span>
+            <i class="fas fa-arrow-down"></i>
+        </div>
+        <div class="nav-buttons">
+            <div class="nav-arrow" id="prevBtn">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="nav-center" id="infoToggleBtn">
+                <span class="model-icon" id="modelIcon">🕌</span>
+                <span class="close-icon">✕</span>
+            </div>
+            <div class="nav-arrow" id="nextBtn">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- UI OVERLAY -->
+    <div class="ui-overlay">
+        <div class="header-info" id="headerInfo">
+            <i class="fas fa-cube"></i>
+            <span>3D Model Idul Fitri</span>
+        </div>
+        <a href="kembali.html" class="back-btn" id="backLink">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+    </div>
+    <div id="thrButton">💰</div>
+
+    <!-- Script Model 3D -->
+    <script type="module" src="model.js"></script>
+
+    <!-- Script Navigasi dan Musik -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ===== INITIALIZATION =====
+            console.log('Memulai model.html...');
+            
+            // UI Elements
+            const headerInfo = document.getElementById('headerInfo');
+            const backBtn = document.getElementById('backLink');
+            const musicBtn = document.getElementById('musicButton');
+            const navPanel = document.getElementById('navPanel');
+            const infoText = document.getElementById('infoText');
+            const loadingScreen = document.getElementById('loadingScreen');
+            
+            // Data model (sinkron dengan model.js)
+            const THR_INDEX = 9;
+            
+            // Fungsi untuk update header berdasarkan model yang aktif
+            window.updateHeaderForModel = function(modelIndex) {
+                if (modelIndex === THR_INDEX) {
+                    // Mode THR
+                    headerInfo.classList.add('thr-mode');
+                    headerInfo.innerHTML = `
+                        <i class="fas fa-gift"></i>
+                        <span>KLAIM THR DIBAWAH (TEKAN 3D MODEL)</span>
+                    `;
+                } else {
+                    // Mode normal
+                    headerInfo.classList.remove('thr-mode');
+                    headerInfo.innerHTML = `
+                        <i class="fas fa-cube"></i>
+                        <span>3D Model Idul Fitri</span>
+                    `;
+                }
+            };
+            
+            // Sembunyikan loading screen setelah model siap
+            window.addEventListener('modelsLoaded', function() {
+                gsap.to(loadingScreen, {
+                    duration: 0.5,
+                    opacity: 0,
+                    pointerEvents: 'none',
+                    zIndex: -1,
+                    onComplete: () => {
+                        loadingScreen.classList.add('hidden');
+                    }
+                });
+            });
+            
+            // Fallback: sembunyikan loading screen setelah 5 detik
+            setTimeout(() => {
+                if (!loadingScreen.classList.contains('hidden')) {
+                    gsap.to(loadingScreen, {
+                        duration: 0.5,
+                        opacity: 0,
+                        pointerEvents: 'none',
+                        zIndex: -1,
+                        onComplete: () => {
+                            loadingScreen.classList.add('hidden');
+                        }
+                    });
+                }
+            }, 5000);
+
+            // ===== MUSIK FUNCTIONALITY =====
+            const bgMusic = document.getElementById('bgMusic');
+            const musicIcon = document.getElementById('musicIcon');
+            
+            if (!bgMusic || !musicBtn || !musicIcon) {
+                console.error('Elemen audio tidak ditemukan!');
+                return;
+            }
+            
+            // Daftar lagu
+            const songs = ['audio/takbiran.mp3', 'audio/idul-fitri.mp3'];
+            let currentMode = 'stop';
+            let isPlaying = false;
+            
+            function nextMode() {
+                if (currentMode === 'stop') { playSong(0); currentMode = 'song1'; }
+                else if (currentMode === 'song1') { playSong(1); currentMode = 'song2'; }
+                else if (currentMode === 'song2') { stopMusic(); currentMode = 'stop'; }
+            }
+            
+            function playSong(songIndex) {
+                bgMusic.src = songs[songIndex];
+                bgMusic.load();
+                bgMusic.play().then(() => {
+                    isPlaying = true;
+                    musicIcon.className = 'fas fa-pause';
+                    musicBtn.classList.remove('playing-song1', 'playing-song2');
+                    musicBtn.classList.add(songIndex === 0 ? 'playing-song1' : 'playing-song2');
+                    localStorage.setItem('currentMode', currentMode);
+                    localStorage.setItem('currentSong', songIndex);
+                    localStorage.setItem('musicPlaying', 'true');
+                    localStorage.setItem('musicTime', bgMusic.currentTime);
+                }).catch(() => {});
+            }
+            
+            function stopMusic() {
+                bgMusic.pause();
+                isPlaying = false;
+                musicIcon.className = 'fas fa-music';
+                musicBtn.classList.remove('playing-song1', 'playing-song2');
+                localStorage.setItem('musicPlaying', 'false');
+                localStorage.setItem('musicTime', bgMusic.currentTime);
+                localStorage.setItem('currentMode', currentMode);
+            }
+            
+            musicBtn.addEventListener('click', (e) => { e.preventDefault(); nextMode(); });
+            
+            // Load musik dari localStorage
+            const savedPlaying = localStorage.getItem('musicPlaying');
+            const savedSong = localStorage.getItem('currentSong');
+            const savedTime = localStorage.getItem('musicTime');
+            
+            if (savedPlaying === 'true' && savedSong !== null) {
+                const songIndex = parseInt(savedSong);
+                bgMusic.src = songs[songIndex];
+                if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
+                bgMusic.play().then(() => {
+                    isPlaying = true;
+                    musicIcon.className = 'fas fa-pause';
+                    musicBtn.classList.add(songIndex === 0 ? 'playing-song1' : 'playing-song2');
+                }).catch(() => {});
+            }
+            
+            setInterval(() => {
+                if (isPlaying && !bgMusic.paused) localStorage.setItem('musicTime', bgMusic.currentTime);
+            }, 1000);
+            
+            bgMusic.addEventListener('pause', () => {
+                isPlaying = false;
+                musicIcon.className = 'fas fa-music';
+                musicBtn.classList.remove('playing-song1', 'playing-song2');
+                localStorage.setItem('musicPlaying', 'false');
+            });
+            
+            // ===== NAVIGASI MODEL =====
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const infoToggleBtn = document.getElementById('infoToggleBtn');
+            const modelInfo = document.getElementById('modelInfo');
+            const modelIcon = document.getElementById('modelIcon');
+            const modelName = document.getElementById('modelName');
+            const modelDesc = document.getElementById('modelDesc');
+            
+            // Data model
+            const models = [
+                { name: 'Masjid Chunakhola', description: 'Masjid Chunakhola adalah masjid berkubah tunggal dari abad ke-15 di desa Chunakhola, Distrik Bagerhat. Masjid peninggalan era Kesultanan ini menjadi contoh peralihan gaya arsitektur dari gaya Khan Jahan ke gaya yang lebih baru. Masjid ini ditetapkan sebagai monumen bersejarah pada 1975 dan masuk daftar Warisan Budaya Dunia UNESCO pada 1983.', icon: '🕌', file: 'models/masjid/masjid.glb', type: 'glb' },
+                { name: 'Kabah', description: 'Kabah adalah bangunan berbentuk kubus di pusat Masjidil Haram, Mekah, yang menjadi kiblat umat Islam saat salat. Dibangun kembali oleh Nabi Ibrahim dan Nabi Ismail, Kabah diselimuti kain hitam (Kiswa) dan menjadi pusat ritual tawaf saat haji dan umrah 🕋✨', icon: '🕋', file: 'models/kabah/kabah.glb', type: 'glb' },
+                { name: 'Al-Quran', description: 'Al-Quran adalah kitab suci umat Islam yang diturunkan kepada Nabi Muhammad melalui malaikat Jibril. Al-Quran terdiri dari sekitar 323.671 huruf, 77.439 kata, 6.236 ayat, 114 surah, dan dibagi menjadi 30 juz sebagai pedoman hidup umat Muslim 📖✨', icon: '📖', file: 'models/alquran/alquran.glb', type: 'glb' },
+                { name: 'Ketupat', description: 'Ketupat dipercaya dipopulerkan oleh Sunan Kalijaga pada masa penyebaran Islam di Jawa. Ketupat menjadi simbol tradisi Idul Fitri, di mana anyaman daun kelapa melambangkan kesalahan manusia dan isi beras putihnya melambangkan hati yang bersih setelah saling memaafkan 🌿🍚', icon: '🍃', file: 'models/ketupat/ketupat.glb', type: 'glb' },
+                { name: 'Bulan Sabit', description: 'Simbol Bulan Sabit dan Bintang sering dikaitkan dengan Islam dan mulai populer sejak masa Kekaisaran Ottoman. Bulan sabit juga berhubungan dengan penentuan kalender Hijriah, seperti awal Ramadan dan penetapan hari raya Idul Fitri yang ditentukan melalui pengamatan hilal 🌙✨', icon: '🌙', file: 'models/bulansabit/bulansabit.glb', type: 'glb' },
+                { name: 'Fanous', description: 'Fanous atau lentera Arab adalah lampu hias tradisional yang sering digunakan saat Ramadan. Tradisi ini berasal dari Mesir dan melambangkan cahaya, kegembiraan, serta suasana meriah menjelang dan selama bulan suci hingga Idul Fitri 🏮✨', icon: '🏮', file: 'models/lentera/lentera.glb', type: 'glb' },
+                { name: 'Bedug', description: 'Bedug adalah alat musik pukul besar yang telah digunakan di Nusantara sejak masa kerajaan Hindu-Buddha, lalu diadaptasi ke masjid saat penyebaran Islam di Jawa. Bedug digunakan untuk menandai waktu salat dan sering ditabuh saat Ramadan serta menjelang Idul Fitri 🥁🌙', icon: '🥁', file: 'models/bedug/bedug.glb', type: 'glb' },
+                { name: 'Opor Ayam', description: 'Opor ayam adalah hidangan ayam dengan kuah santan dan rempah yang populer di Indonesia. Makanan ini sering disajikan bersama Ketupat saat perayaan Idul Fitri dan dipercaya berasal dari perpaduan budaya Jawa dengan pengaruh kuliner Timur Tengah dan India', icon: '🍗', file: 'models/oporayam/oporayam.glb', type: 'glb' },
+                { name: 'Nastar', description: 'Nastar adalah kue kering berisi selai nanas yang populer di Indonesia. Kue ini mendapat pengaruh dari kue Belanda ananas taart pada masa kolonial dan kini menjadi hidangan khas saat perayaan Idul Fitri', icon: '🍪', file: 'models/nastar/nastar.glb', type: 'glb' },
+                { name: 'THR', description: 'THR adalah tradisi pemberian uang menjelang hari raya, terutama Idul Fitri. Tradisi ini bermula pada tahun 1950-an saat masa pemerintahan Soekarno, ketika pemerintah memberikan tunjangan kepada pegawai agar dapat merayakan hari raya dengan lebih layak. Seiring waktu, THR juga menjadi kebiasaan memberi uang kepada anak-anak dan keluarga saat Lebaran. 💸🎉', icon: '💰', file: 'models/thr/thr.glb', type: 'glb' }
+            ];
+            
+            let currentModelIndex = 0;
+            let infoVisible = false;
+            let isLoading = false;
+            
+            function setNavigationEnabled(enabled) {
+                const navButtons = [prevBtn, nextBtn, infoToggleBtn];
+                navButtons.forEach(btn => {
+                    if (enabled) btn.classList.remove('disabled');
+                    else btn.classList.add('disabled');
+                });
+            }
+            
+            function updateModelInfo() { 
+    modelName.textContent = models[currentModelIndex].name;
+    modelDesc.textContent = models[currentModelIndex].description;
+
+    // 🔥 AMBIL ELEMEN EMOJI
+    const thrButton = document.getElementById('thrButton');
+
+    // 🔥 CEK MODEL THR
+    if (currentModelIndex === 9) {
+        thrButton.style.display = 'block'; // tampil
+    } else {
+        thrButton.style.display = 'none'; // sembunyi
+    }
+}
+            
+            function updateModelIcon() {
+                if (modelIcon) modelIcon.textContent = models[currentModelIndex].icon;
+            }
+            
+            function showInfo() { 
+                modelInfo.classList.remove('hide'); 
+                modelInfo.classList.add('show'); 
+                infoToggleBtn.classList.add('showing-info');
+                infoText.style.opacity = '0.5';
+                infoVisible = true; 
+            }
+            
+            function hideInfo() { 
+                modelInfo.classList.remove('show'); 
+                modelInfo.classList.add('hide'); 
+                infoToggleBtn.classList.remove('showing-info');
+                infoText.style.opacity = '1';
+                infoVisible = false; 
+            }
+            
+            function toggleInfo() { 
+                infoVisible ? hideInfo() : showInfo(); 
+            }
+            
+            function changeModel(direction) {
+                if (isLoading) return;
+                
+                hideInfo();
+                
+                isLoading = true;
+                setNavigationEnabled(false);
+                
+                currentModelIndex = direction === 'next' 
+                    ? (currentModelIndex + 1) % models.length 
+                    : (currentModelIndex - 1 + models.length) % models.length;
+                
+                const event = new CustomEvent('changeModel', { 
+                    detail: { 
+                        index: currentModelIndex, 
+                        file: models[currentModelIndex].file,
+                        type: models[currentModelIndex].type,
+                        name: models[currentModelIndex].name
+                    } 
+                });
+                window.dispatchEvent(event);
+                
+                updateModelInfo();
+                updateModelIcon();
+            }
+            
+            window.addEventListener('modelsLoaded', function() {
+                isLoading = false;
+                setNavigationEnabled(true);
+            });
+            
+            prevBtn.addEventListener('click', () => changeModel('prev'));
+            nextBtn.addEventListener('click', () => changeModel('next'));
+            infoToggleBtn.addEventListener('click', toggleInfo);
+            
+            updateModelInfo();
+            updateModelIcon();
+            
+            if (backBtn) {
+                backBtn.addEventListener('click', function(e) {
+                    localStorage.setItem('musicPlaying', isPlaying ? 'true' : 'false');
+                    localStorage.setItem('currentMode', currentMode);
+                    localStorage.setItem('musicTime', bgMusic.currentTime);
+                    if (currentMode === 'song1') localStorage.setItem('currentSong', 0);
+                    else if (currentMode === 'song2') localStorage.setItem('currentSong', 1);
+                });
+            }
+        });
+    </script>
+  
+    <!-- ===== SOUND EFFECT TOMBOL DENGAN FALLBACK ===== -->
+    <audio id="clickSound" preload="auto">
+        <source src="https://b.top4top.io/m_37282opyz0.mp3" type="audio/mpeg">
+        <source src="sounds/button2.mp3" type="audio/mpeg">
+    </audio>
+  
+    <script>
+        (function() {
+            const clickSound = document.getElementById('clickSound');
+            if (!clickSound) return;
+            
+            clickSound.volume = 0.3;
+            
+            function playClickSound() {
+                const sound = clickSound.cloneNode();
+                sound.volume = 0.3;
+                
+                sound.play().catch(e => {
+                    console.log('Error memutar suara dari link, coba fallback...');
+                    
+                    try {
+                        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                        
+                        if (audioCtx.state === 'suspended') {
+                            audioCtx.resume();
+                        }
+                        
+                        const now = audioCtx.currentTime;
+                        const osc = audioCtx.createOscillator();
+                        const gainNode = audioCtx.createGain();
+                        
+                        osc.type = 'sine';
+                        osc.frequency.value = 400;
+                        
+                        gainNode.gain.setValueAtTime(0.1, now);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                        
+                        osc.connect(gainNode);
+                        gainNode.connect(audioCtx.destination);
+                        
+                        osc.start(now);
+                        osc.stop(now + 0.1);
+                    } catch (fallbackErr) {
+                        console.log('Fallback audio juga gagal');
+                    }
+                });
+            }
+            
+            function addSoundToAllButtons() {
+                const selectors = [
+                    'button', 
+                    '.btn', 
+                    '.back-btn', 
+                    '.music-btn',
+                    '.nav-arrow', 
+                    '.nav-center',
+                    '#prevBtn', 
+                    '#nextBtn', 
+                    '#infoToggleBtn',
+                    '#musicButton', 
+                    '#backLink', 
+                    'a[href]'
+                ];
+                
+                let total = 0;
+                
+                selectors.forEach(selector => {
+                    document.querySelectorAll(selector).forEach(el => {
+                        if (!el.hasClickSound) {
+                            el.hasClickSound = true;
+                            el.addEventListener('click', playClickSound);
+                            total++;
+                        }
+                    });
+                });
+                
+                console.log(`✅ Sound effect ditambahkan ke ${total} tombol`);
+            }
+            
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', addSoundToAllButtons);
+            } else {
+                addSoundToAllButtons();
+            }
+        })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+      const thrButton = document.getElementById('thrButton');
+
+thrButton.addEventListener('click', () => {
+
+    console.log("EMOJI DIKLIK 💰");
+
+    // 🎉 CONFETTI (opsional tapi keren)
+    if (typeof confetti === 'function') {
+        confetti({
+            particleCount: 80,
+            spread: 100
+        });
+    }
+
+    // 📳 getar (kalau di HP)
+    if (navigator.vibrate) navigator.vibrate(100);
+
+    // ⏳ delay biar efek keliatan
+    setTimeout(() => {
+        window.location.href = 'https://link.dana.id/danakaget?c=sf6xpd6pu&r=cOvtVg&orderId=20260319101214522915010300166488469662214'; // 🔥 GANTI LINK KAMU
+    }, 800);
+});
+    </script>
+</body>
+</html>
