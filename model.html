@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Model Idul Fitri - 10 Model</title>
+    <title>3D Model Idul Fitri</title>
     <style>
         * {
             margin: 0;
@@ -143,7 +143,7 @@
             padding: 20px;
         }
 
-        /* Header Info - 1 BARIS DI TENGAH ATAS */
+        /* Header Info */
         .header-info {
             position: absolute;
             top: 20px;
@@ -161,7 +161,6 @@
             pointer-events: none;
             z-index: 150;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            opacity: 1;
             white-space: nowrap;
             transition: all 0.3s ease;
         }
@@ -177,7 +176,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Style khusus untuk THR */
         .header-info.thr-mode {
             background: linear-gradient(135deg, #ffd700, #ffaa00);
             color: #1d5a3e;
@@ -219,7 +217,6 @@
             z-index: 200;
             pointer-events: all;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            opacity: 1;
         }
 
         .back-btn:hover {
@@ -243,10 +240,6 @@
             border-color: #ffd700;
         }
 
-        .back-btn:active i {
-            color: #ffd700;
-        }
-
         /* ===== TOMBOL MUSIK ===== */
         .music-btn {
             position: fixed;
@@ -263,8 +256,7 @@
             cursor: pointer;
             z-index: 300;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
-            opacity: 1;
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         .music-btn:hover {
@@ -280,16 +272,6 @@
 
         .music-btn:hover i {
             color: #1d5a3e;
-        }
-
-        .music-btn:active {
-            transform: scale(0.98);
-            background: linear-gradient(135deg, #1d5a3e, #0a3b2a);
-            border-color: #ffd700;
-        }
-
-        .music-btn:active i {
-            color: #ffd700;
         }
 
         .music-btn.playing-song1 i,
@@ -322,13 +304,6 @@
             gap: 8px;
             z-index: 250;
             pointer-events: all;
-            transition: opacity 0.3s ease;
-            opacity: 1;
-        }
-
-        .nav-panel.hidden {
-            opacity: 0;
-            pointer-events: none;
         }
 
         .nav-arrow.disabled,
@@ -354,7 +329,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
+            transition: background 0.3s ease, border-color 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
@@ -375,12 +350,6 @@
 
         .nav-arrow:active {
             transform: scale(0.98);
-            background: linear-gradient(135deg, #1d5a3e, #0a3b2a);
-            border-color: #ffd700;
-        }
-
-        .nav-arrow:active i {
-            color: #ffd700;
         }
 
         .nav-center {
@@ -393,7 +362,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
+            transition: background 0.3s ease, border-color 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             font-weight: bold;
             font-size: 1.8rem;
@@ -434,20 +403,6 @@
             color: #1d5a3e;
         }
 
-        .nav-center:active {
-            transform: scale(0.98);
-            background: linear-gradient(135deg, #1d5a3e, #0a3b2a);
-            border-color: #ffd700;
-        }
-
-        .nav-center:active .model-icon {
-            color: #ffd700;
-        }
-
-        .nav-center:active .close-icon {
-            color: #ff4444;
-        }
-
         .nav-center .model-icon {
             display: flex;
         }
@@ -477,12 +432,10 @@
             border-radius: 30px;
             border: 1px solid rgba(255, 215, 0, 0.5);
             margin-bottom: 5px;
-            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             gap: 5px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            opacity: 1;
         }
 
         .info-text i {
@@ -509,7 +462,7 @@
             border: 2px solid #ffd700;
             border-radius: 30px;
             padding: 20px 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 215, 0, 0.2) inset;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             z-index: 180;
             opacity: 0;
             transform: translateX(-50%) translateY(20px);
@@ -536,25 +489,18 @@
             color: #ffd700;
             margin-bottom: 12px;
             font-family: 'Playfair Display', serif;
-            line-height: 1.3;
             text-align: center;
             border-bottom: 2px solid rgba(255, 215, 0, 0.3);
             padding-bottom: 10px;
             text-shadow: 0 2px 5px rgba(255, 215, 0, 0.3);
-            letter-spacing: 0.5px;
         }
 
         .model-desc {
             font-size: 1rem;
             color: #f0f0f0;
-            opacity: 0.95;
-            font-weight: 400;
             line-height: 1.7;
             text-align: justify;
-            text-justify: inter-word;
             margin-bottom: 5px;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-            hyphens: auto;
             padding: 0 5px;
         }
 
@@ -568,6 +514,33 @@
             pointer-events: auto;
         }
 
+        /* Tombol THR */
+        #thrButton {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, #ffd700, #ffaa00);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            cursor: pointer;
+            z-index: 9999;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+            transition: transform 0.3s ease;
+            display: none;
+            opacity :0;
+        }
+
+        #thrButton:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            opacity:0;
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .ui-overlay { padding: 15px; }
@@ -575,7 +548,6 @@
                 top: 15px;
                 padding: 10px 20px;
                 gap: 10px;
-                z-index: 150;
             }
             .header-info i { font-size: 1.1rem; }
             .header-info span { font-size: 0.9rem; }
@@ -585,7 +557,6 @@
                 left: 20px;
                 width: 50px;
                 height: 50px;
-                z-index: 200;
             }
             .back-btn i { font-size: 1.5rem; }
             
@@ -594,7 +565,6 @@
                 right: 20px;
                 width: 50px;
                 height: 50px;
-                z-index: 300;
             }
             .music-btn i { font-size: 1.4rem; }
             
@@ -602,7 +572,6 @@
                 bottom: 120px;
                 padding: 15px 25px;
                 min-width: 250px;
-                z-index: 180;
             }
             
             .model-name {
@@ -613,19 +582,18 @@
                 font-size: 0.9rem;
             }
             
-            .nav-panel { 
-                bottom: 20px; 
-                z-index: 250;
-            }
+            .nav-panel { bottom: 20px; }
             .nav-buttons { gap: 15px; }
             .nav-arrow { width: 45px; height: 45px; }
             .nav-arrow i { font-size: 1.3rem; }
             .nav-center { width: 55px; height: 55px; font-size: 1.5rem; }
-            .info-text { 
-                font-size: 0.8rem; 
-                padding: 5px 14px; 
+            .info-text { font-size: 0.8rem; padding: 5px 14px; }
+            
+            #thrButton {
+                width: 90px;
+                height: 90px;
+                font-size: 3rem;
             }
-            .info-text i { font-size: 0.7rem; }
         }
 
         @media (max-width: 480px) {
@@ -634,7 +602,6 @@
                 padding: 8px 16px;
                 gap: 8px;
                 border-width: 1.5px;
-                z-index: 150;
             }
             .header-info i { font-size: 1rem; }
             .header-info span { font-size: 0.85rem; }
@@ -645,7 +612,6 @@
                 width: 45px;
                 height: 45px;
                 border-width: 1.5px;
-                z-index: 200;
             }
             .back-btn i { font-size: 1.3rem; }
             
@@ -654,7 +620,6 @@
                 right: 15px;
                 width: 45px;
                 height: 45px;
-                z-index: 300;
             }
             .music-btn i { font-size: 1.3rem; }
             
@@ -662,7 +627,6 @@
                 bottom: 105px;
                 padding: 12px 20px;
                 min-width: 220px;
-                z-index: 180;
             }
             
             .model-name {
@@ -673,41 +637,20 @@
                 font-size: 0.8rem;
             }
             
-            .nav-panel { 
-                bottom: 15px; 
-                z-index: 250;
-            }
+            .nav-panel { bottom: 15px; }
             .nav-buttons { gap: 12px; }
             .nav-arrow { width: 40px; height: 40px; }
             .nav-arrow i { font-size: 1.2rem; }
             .nav-center { width: 50px; height: 50px; font-size: 1.3rem; }
             .nav-center .close-icon { font-size: 1.8rem; }
-            .info-text { 
-                font-size: 0.7rem; 
-                padding: 4px 12px; 
+            .info-text { font-size: 0.7rem; padding: 4px 12px; }
+            
+            #thrButton {
+                width: 70px;
+                height: 70px;
+                font-size: 2.5rem;
             }
-            .info-text i { font-size: 0.6rem; }
         }
- #thrButton {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    width: 150px;
-    height: 150px;
-
-    opacity: 0; /* 🔥 bikin ga keliatan */
-    cursor: pointer;
-
-    z-index: 9999;
-    display: none;
-}
-
-#thrButton:hover {
-    transform: translate(-50%, -50%) scale(1.2);
-    opacity: 0;
-}
     </style>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -715,6 +658,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <!-- GSAP Animation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <!-- Three.js Import Map -->
     <script type="importmap">
         {
@@ -784,10 +729,12 @@
             <i class="fas fa-cube"></i>
             <span>3D Model Idul Fitri</span>
         </div>
-        <a href="kembali.html" class="back-btn" id="backLink">
+        <a href="index.html" class="back-btn" id="backLink">
             <i class="fas fa-arrow-left"></i>
         </a>
     </div>
+
+    <!-- TOMBOL THR (HANYA MUNCUL SAAT MODEL THR) -->
     <div id="thrButton">💰</div>
 
     <!-- Script Model 3D -->
@@ -796,140 +743,127 @@
     <!-- Script Navigasi dan Musik -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // ===== INITIALIZATION =====
             console.log('Memulai model.html...');
             
             // UI Elements
             const headerInfo = document.getElementById('headerInfo');
             const backBtn = document.getElementById('backLink');
             const musicBtn = document.getElementById('musicButton');
-            const navPanel = document.getElementById('navPanel');
-            const infoText = document.getElementById('infoText');
             const loadingScreen = document.getElementById('loadingScreen');
+            const thrButton = document.getElementById('thrButton');
             
-            // Data model (sinkron dengan model.js)
             const THR_INDEX = 9;
             
-            // Fungsi untuk update header berdasarkan model yang aktif
+            // Update header berdasarkan model
             window.updateHeaderForModel = function(modelIndex) {
                 if (modelIndex === THR_INDEX) {
-                    // Mode THR
                     headerInfo.classList.add('thr-mode');
-                    headerInfo.innerHTML = `
-                        <i class="fas fa-gift"></i>
-                        <span>KLAIM THR DIBAWAH (TEKAN 3D MODEL)</span>
-                    `;
+                    headerInfo.innerHTML = `<i class="fas fa-gift"></i><span>KLAIM THR DIBAWAH (TEKAN 3D MODEL)</span>`;
                 } else {
-                    // Mode normal
                     headerInfo.classList.remove('thr-mode');
-                    headerInfo.innerHTML = `
-                        <i class="fas fa-cube"></i>
-                        <span>3D Model Idul Fitri</span>
-                    `;
+                    headerInfo.innerHTML = `<i class="fas fa-cube"></i><span>3D Model Idul Fitri</span>`;
                 }
             };
             
-            // Sembunyikan loading screen setelah model siap
+            // Sembunyikan loading screen
             window.addEventListener('modelsLoaded', function() {
                 gsap.to(loadingScreen, {
                     duration: 0.5,
                     opacity: 0,
                     pointerEvents: 'none',
-                    zIndex: -1,
-                    onComplete: () => {
-                        loadingScreen.classList.add('hidden');
-                    }
+                    onComplete: () => loadingScreen.classList.add('hidden')
                 });
             });
             
-            // Fallback: sembunyikan loading screen setelah 5 detik
             setTimeout(() => {
                 if (!loadingScreen.classList.contains('hidden')) {
                     gsap.to(loadingScreen, {
                         duration: 0.5,
                         opacity: 0,
                         pointerEvents: 'none',
-                        zIndex: -1,
-                        onComplete: () => {
-                            loadingScreen.classList.add('hidden');
-                        }
+                        onComplete: () => loadingScreen.classList.add('hidden')
                     });
                 }
             }, 5000);
 
-            // ===== MUSIK FUNCTIONALITY =====
+            // ===== MUSIK =====
             const bgMusic = document.getElementById('bgMusic');
             const musicIcon = document.getElementById('musicIcon');
             
-            if (!bgMusic || !musicBtn || !musicIcon) {
-                console.error('Elemen audio tidak ditemukan!');
-                return;
-            }
-            
-            // Daftar lagu
-            const songs = ['audio/takbiran.mp3', 'audio/idul-fitri.mp3'];
-            let currentMode = 'stop';
-            let isPlaying = false;
-            
-            function nextMode() {
-                if (currentMode === 'stop') { playSong(0); currentMode = 'song1'; }
-                else if (currentMode === 'song1') { playSong(1); currentMode = 'song2'; }
-                else if (currentMode === 'song2') { stopMusic(); currentMode = 'stop'; }
-            }
-            
-            function playSong(songIndex) {
-                bgMusic.src = songs[songIndex];
-                bgMusic.load();
-                bgMusic.play().then(() => {
-                    isPlaying = true;
-                    musicIcon.className = 'fas fa-pause';
+            if (bgMusic && musicBtn && musicIcon) {
+                const songs = ['audio/takbiran.mp3', 'audio/idul-fitri.mp3'];
+                let currentMode = 'stop';
+                let isPlaying = false;
+                
+                function nextMode() {
+                    if (currentMode === 'stop') { playSong(0); currentMode = 'song1'; }
+                    else if (currentMode === 'song1') { playSong(1); currentMode = 'song2'; }
+                    else if (currentMode === 'song2') { stopMusic(); currentMode = 'stop'; }
+                }
+                
+                function playSong(songIndex) {
+                    bgMusic.src = songs[songIndex];
+                    bgMusic.load();
+                    bgMusic.play().then(() => {
+                        isPlaying = true;
+                        musicIcon.className = 'fas fa-pause';
+                        musicBtn.classList.remove('playing-song1', 'playing-song2');
+                        musicBtn.classList.add(songIndex === 0 ? 'playing-song1' : 'playing-song2');
+                        localStorage.setItem('currentMode', currentMode);
+                        localStorage.setItem('currentSong', songIndex);
+                        localStorage.setItem('musicPlaying', 'true');
+                        localStorage.setItem('musicTime', bgMusic.currentTime);
+                    }).catch(() => {});
+                }
+                
+                function stopMusic() {
+                    bgMusic.pause();
+                    isPlaying = false;
+                    musicIcon.className = 'fas fa-music';
                     musicBtn.classList.remove('playing-song1', 'playing-song2');
-                    musicBtn.classList.add(songIndex === 0 ? 'playing-song1' : 'playing-song2');
-                    localStorage.setItem('currentMode', currentMode);
-                    localStorage.setItem('currentSong', songIndex);
-                    localStorage.setItem('musicPlaying', 'true');
+                    localStorage.setItem('musicPlaying', 'false');
                     localStorage.setItem('musicTime', bgMusic.currentTime);
-                }).catch(() => {});
+                    localStorage.setItem('currentMode', currentMode);
+                }
+                
+                musicBtn.addEventListener('click', (e) => { e.preventDefault(); nextMode(); });
+                
+                const savedPlaying = localStorage.getItem('musicPlaying');
+                const savedSong = localStorage.getItem('currentSong');
+                const savedTime = localStorage.getItem('musicTime');
+                
+                if (savedPlaying === 'true' && savedSong !== null) {
+                    const songIndex = parseInt(savedSong);
+                    bgMusic.src = songs[songIndex];
+                    if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
+                    bgMusic.play().then(() => {
+                        isPlaying = true;
+                        musicIcon.className = 'fas fa-pause';
+                        musicBtn.classList.add(songIndex === 0 ? 'playing-song1' : 'playing-song2');
+                    }).catch(() => {});
+                }
+                
+                setInterval(() => {
+                    if (isPlaying && !bgMusic.paused) localStorage.setItem('musicTime', bgMusic.currentTime);
+                }, 1000);
+                
+                bgMusic.addEventListener('pause', () => {
+                    isPlaying = false;
+                    musicIcon.className = 'fas fa-music';
+                    musicBtn.classList.remove('playing-song1', 'playing-song2');
+                    localStorage.setItem('musicPlaying', 'false');
+                });
+                
+                if (backBtn) {
+                    backBtn.addEventListener('click', function() {
+                        localStorage.setItem('musicPlaying', isPlaying ? 'true' : 'false');
+                        localStorage.setItem('currentMode', currentMode);
+                        localStorage.setItem('musicTime', bgMusic.currentTime);
+                        if (currentMode === 'song1') localStorage.setItem('currentSong', 0);
+                        else if (currentMode === 'song2') localStorage.setItem('currentSong', 1);
+                    });
+                }
             }
-            
-            function stopMusic() {
-                bgMusic.pause();
-                isPlaying = false;
-                musicIcon.className = 'fas fa-music';
-                musicBtn.classList.remove('playing-song1', 'playing-song2');
-                localStorage.setItem('musicPlaying', 'false');
-                localStorage.setItem('musicTime', bgMusic.currentTime);
-                localStorage.setItem('currentMode', currentMode);
-            }
-            
-            musicBtn.addEventListener('click', (e) => { e.preventDefault(); nextMode(); });
-            
-            // Load musik dari localStorage
-            const savedPlaying = localStorage.getItem('musicPlaying');
-            const savedSong = localStorage.getItem('currentSong');
-            const savedTime = localStorage.getItem('musicTime');
-            
-            if (savedPlaying === 'true' && savedSong !== null) {
-                const songIndex = parseInt(savedSong);
-                bgMusic.src = songs[songIndex];
-                if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
-                bgMusic.play().then(() => {
-                    isPlaying = true;
-                    musicIcon.className = 'fas fa-pause';
-                    musicBtn.classList.add(songIndex === 0 ? 'playing-song1' : 'playing-song2');
-                }).catch(() => {});
-            }
-            
-            setInterval(() => {
-                if (isPlaying && !bgMusic.paused) localStorage.setItem('musicTime', bgMusic.currentTime);
-            }, 1000);
-            
-            bgMusic.addEventListener('pause', () => {
-                isPlaying = false;
-                musicIcon.className = 'fas fa-music';
-                musicBtn.classList.remove('playing-song1', 'playing-song2');
-                localStorage.setItem('musicPlaying', 'false');
-            });
             
             // ===== NAVIGASI MODEL =====
             const prevBtn = document.getElementById('prevBtn');
@@ -940,7 +874,6 @@
             const modelName = document.getElementById('modelName');
             const modelDesc = document.getElementById('modelDesc');
             
-            // Data model
             const models = [
                 { name: 'Masjid Chunakhola', description: 'Masjid Chunakhola adalah masjid berkubah tunggal dari abad ke-15 di desa Chunakhola, Distrik Bagerhat. Masjid peninggalan era Kesultanan ini menjadi contoh peralihan gaya arsitektur dari gaya Khan Jahan ke gaya yang lebih baru. Masjid ini ditetapkan sebagai monumen bersejarah pada 1975 dan masuk daftar Warisan Budaya Dunia UNESCO pada 1983.', icon: '🕌', file: 'models/masjid/masjid.glb', type: 'glb' },
                 { name: 'Kabah', description: 'Kabah adalah bangunan berbentuk kubus di pusat Masjidil Haram, Mekah, yang menjadi kiblat umat Islam saat salat. Dibangun kembali oleh Nabi Ibrahim dan Nabi Ismail, Kabah diselimuti kain hitam (Kiswa) dan menjadi pusat ritual tawaf saat haji dan umrah 🕋✨', icon: '🕋', file: 'models/kabah/kabah.glb', type: 'glb' },
@@ -959,27 +892,27 @@
             let isLoading = false;
             
             function setNavigationEnabled(enabled) {
-                const navButtons = [prevBtn, nextBtn, infoToggleBtn];
-                navButtons.forEach(btn => {
+                [prevBtn, nextBtn, infoToggleBtn].forEach(btn => {
                     if (enabled) btn.classList.remove('disabled');
                     else btn.classList.add('disabled');
                 });
             }
             
             function updateModelInfo() { 
-    modelName.textContent = models[currentModelIndex].name;
-    modelDesc.textContent = models[currentModelIndex].description;
-
-    // 🔥 AMBIL ELEMEN EMOJI
-    const thrButton = document.getElementById('thrButton');
-
-    // 🔥 CEK MODEL THR
-    if (currentModelIndex === 9) {
-        thrButton.style.display = 'block'; // tampil
-    } else {
-        thrButton.style.display = 'none'; // sembunyi
-    }
-}
+                modelName.textContent = models[currentModelIndex].name;
+                modelDesc.textContent = models[currentModelIndex].description;
+                
+                // Tampilkan/sembunyikan tombol THR
+                if (currentModelIndex === 9) {
+                    thrButton.style.display = 'flex';
+                } else {
+                    thrButton.style.display = 'none';
+                }
+                
+                if (window.updateHeaderForModel) {
+                    window.updateHeaderForModel(currentModelIndex);
+                }
+            }
             
             function updateModelIcon() {
                 if (modelIcon) modelIcon.textContent = models[currentModelIndex].icon;
@@ -1009,7 +942,6 @@
                 if (isLoading) return;
                 
                 hideInfo();
-                
                 isLoading = true;
                 setNavigationEnabled(false);
                 
@@ -1017,15 +949,14 @@
                     ? (currentModelIndex + 1) % models.length 
                     : (currentModelIndex - 1 + models.length) % models.length;
                 
-                const event = new CustomEvent('changeModel', { 
+                window.dispatchEvent(new CustomEvent('changeModel', { 
                     detail: { 
                         index: currentModelIndex, 
                         file: models[currentModelIndex].file,
                         type: models[currentModelIndex].type,
                         name: models[currentModelIndex].name
                     } 
-                });
-                window.dispatchEvent(event);
+                }));
                 
                 updateModelInfo();
                 updateModelIcon();
@@ -1042,20 +973,10 @@
             
             updateModelInfo();
             updateModelIcon();
-            
-            if (backBtn) {
-                backBtn.addEventListener('click', function(e) {
-                    localStorage.setItem('musicPlaying', isPlaying ? 'true' : 'false');
-                    localStorage.setItem('currentMode', currentMode);
-                    localStorage.setItem('musicTime', bgMusic.currentTime);
-                    if (currentMode === 'song1') localStorage.setItem('currentSong', 0);
-                    else if (currentMode === 'song2') localStorage.setItem('currentSong', 1);
-                });
-            }
         });
     </script>
   
-    <!-- ===== SOUND EFFECT TOMBOL DENGAN FALLBACK ===== -->
+    <!-- ===== SOUND EFFECT TOMBOL ===== -->
     <audio id="clickSound" preload="auto">
         <source src="https://b.top4top.io/m_37282opyz0.mp3" type="audio/mpeg">
         <source src="sounds/button2.mp3" type="audio/mpeg">
@@ -1071,56 +992,28 @@
             function playClickSound() {
                 const sound = clickSound.cloneNode();
                 sound.volume = 0.3;
-                
                 sound.play().catch(e => {
-                    console.log('Error memutar suara dari link, coba fallback...');
-                    
+                    console.log('Error memutar suara, fallback beep');
                     try {
                         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                        
-                        if (audioCtx.state === 'suspended') {
-                            audioCtx.resume();
-                        }
-                        
-                        const now = audioCtx.currentTime;
+                        if (audioCtx.state === 'suspended') audioCtx.resume();
                         const osc = audioCtx.createOscillator();
-                        const gainNode = audioCtx.createGain();
-                        
+                        const gain = audioCtx.createGain();
                         osc.type = 'sine';
                         osc.frequency.value = 400;
-                        
-                        gainNode.gain.setValueAtTime(0.1, now);
-                        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
-                        
-                        osc.connect(gainNode);
-                        gainNode.connect(audioCtx.destination);
-                        
-                        osc.start(now);
-                        osc.stop(now + 0.1);
-                    } catch (fallbackErr) {
-                        console.log('Fallback audio juga gagal');
-                    }
+                        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start();
+                        osc.stop(audioCtx.currentTime + 0.1);
+                    } catch (err) {}
                 });
             }
             
             function addSoundToAllButtons() {
-                const selectors = [
-                    'button', 
-                    '.btn', 
-                    '.back-btn', 
-                    '.music-btn',
-                    '.nav-arrow', 
-                    '.nav-center',
-                    '#prevBtn', 
-                    '#nextBtn', 
-                    '#infoToggleBtn',
-                    '#musicButton', 
-                    '#backLink', 
-                    'a[href]'
-                ];
-                
+                const selectors = ['button', '.btn', '.back-btn', '.music-btn', '.nav-arrow', '.nav-center', '#prevBtn', '#nextBtn', '#infoToggleBtn', '#musicButton', '#backLink', 'a[href]'];
                 let total = 0;
-                
                 selectors.forEach(selector => {
                     document.querySelectorAll(selector).forEach(el => {
                         if (!el.hasClickSound) {
@@ -1130,7 +1023,6 @@
                         }
                     });
                 });
-                
                 console.log(`✅ Sound effect ditambahkan ke ${total} tombol`);
             }
             
@@ -1141,30 +1033,30 @@
             }
         })();
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <!-- SCRIPT THR CLICK -->
     <script>
-      const thrButton = document.getElementById('thrButton');
-
-thrButton.addEventListener('click', () => {
-
-    console.log("EMOJI DIKLIK 💰");
-
-    // 🎉 CONFETTI (opsional tapi keren)
-    if (typeof confetti === 'function') {
-        confetti({
-            particleCount: 80,
-            spread: 100
-        });
-    }
-
-    // 📳 getar (kalau di HP)
-    if (navigator.vibrate) navigator.vibrate(100);
-
-    // ⏳ delay biar efek keliatan
-    setTimeout(() => {
-        window.location.href = 'https://link.dana.id/danakaget?c=sf6xpd6pu&r=cOvtVg&orderId=20260319101214522915010300166488469662214'; // 🔥 GANTI LINK KAMU
-    }, 800);
-});
+        const thrButton = document.getElementById('thrButton');
+        if (thrButton) {
+            thrButton.addEventListener('click', () => {
+                console.log("💰 THR Diklik!");
+                
+                // Confetti
+                if (typeof confetti === 'function') {
+                    confetti({ particleCount: 100, spread: 100, origin: { y: 0.6 } });
+                    setTimeout(() => confetti({ particleCount: 80, spread: 80, origin: { y: 0.6, x: 0.3 } }), 200);
+                    setTimeout(() => confetti({ particleCount: 80, spread: 80, origin: { y: 0.6, x: 0.7 } }), 400);
+                }
+                
+                // Getar HP
+                if (navigator.vibrate) navigator.vibrate(100);
+                
+                // Redirect ke link DANA
+                setTimeout(() => {
+                    window.location.href = 'https://link.dana.id/danakaget?c=sf6xpd6pu&r=cOvtVg&orderId=20260319101214522915010300166488469662214';
+                }, 800);
+            });
+        }
     </script>
 </body>
 </html>
